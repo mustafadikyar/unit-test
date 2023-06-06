@@ -8,6 +8,9 @@ public class LineParsers
 
         foreach (var line in lines)
         {
+            if (string.IsNullOrWhiteSpace(line))
+                continue;
+
             var dataItem = Parse(line);
             dataItems.Add(dataItem);
         }
@@ -17,6 +20,13 @@ public class LineParsers
     private static DataItem Parse(string line)
     {
         var lineItems = line.Split(';');
-        return new DataItem(lineItems[0], DateTime.Parse(lineItems[1], CultureInfo.InvariantCulture));
+
+        if (lineItems.Length != 2)
+            throw new Exception($"Invalid line: {line}");
+
+        if (!DateTime.TryParse(lineItems[1], CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime))
+            throw new Exception($"Invalid datetime in line: {line}");
+
+        return new DataItem(lineItems[0], dateTime);
     }
 }
