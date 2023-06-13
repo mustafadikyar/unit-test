@@ -19,13 +19,22 @@ public class DataProcessor
         SaveCountPerCoffeeType();
     }
 
+    private DataItem previousItem;
     private void ProcessItem(DataItem dataItem)
     {
+        if (!IsNewerThanPreviousItem(dataItem))
+            return;
+
         if (!_countPerCoffeeType.ContainsKey(dataItem.CoffeeType))
             _countPerCoffeeType.Add(dataItem.CoffeeType, 1);
         else
             _countPerCoffeeType[dataItem.CoffeeType]++;
+
+        previousItem = dataItem;
     }
+
+    private bool IsNewerThanPreviousItem(DataItem dataItem) 
+        => previousItem is null || previousItem.CreatedAt < dataItem.CreatedAt;
 
     private void SaveCountPerCoffeeType()
     {

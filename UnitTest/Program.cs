@@ -13,8 +13,12 @@ List<string> lines = new()
     "Cappuccino; 10/27/2022 8:13:00 AM",
     "Cappuccino; 10/27/2022 8:15:43 AM",
     "Espresso; 10/27/2022 8:17:32 AM",
+
     "Cappuccino; 10/27/2022 8:19:26 AM",
-    "Cappuccino; 10/27/2022 8:22:01 AM"
+    "Cappuccino; 10/27/2022 8:22:01 AM",
+
+    "Cappuccino; 10/27/2022 8:11:26 AM",
+    "Cappuccino; 10/27/2022 8:21:01 AM"
 };
 
 DataItem[] machineDataItems = LineParsers.Parse(lines);
