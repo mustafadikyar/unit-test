@@ -1,17 +1,20 @@
-﻿namespace UnitTest.Processors;
+﻿using UnitTest.Data;
+
+namespace UnitTest.Processors;
 
 public class DataProcessor
 {
     private readonly Dictionary<string, int> _countPerCoffeeType = new();
+    private readonly ICoffeeCountStore _coffeeCountStore;
+
+    public DataProcessor(ICoffeeCountStore coffeeCountStore) => _coffeeCountStore = coffeeCountStore;
 
     public void ProcessItems(DataItem[] dataItems)
     {
         _countPerCoffeeType.Clear();
 
         foreach (var dataItem in dataItems)
-        {
             ProcessItem(dataItem);
-        }
 
         SaveCountPerCoffeeType();
     }
@@ -27,6 +30,6 @@ public class DataProcessor
     private void SaveCountPerCoffeeType()
     {
         foreach (var entry in _countPerCoffeeType)
-            Console.WriteLine($"{entry.Key}:{entry.Value}");
+            _coffeeCountStore.Save(new CoffeeCountItem(entry.Key, entry.Value));
     }
 }

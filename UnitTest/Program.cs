@@ -1,4 +1,6 @@
-﻿Console.WriteLine("-----------------    Data Processor  ----------------------");
+﻿using UnitTest.Data;
+
+Console.WriteLine("-----------------    Data Processor  ----------------------");
 Console.WriteLine();
 
 List<string> lines = new()
@@ -17,8 +19,8 @@ List<string> lines = new()
 
 DataItem[] machineDataItems = LineParsers.Parse(lines);
 
-DataProcessor dataProcessor = new();
-dataProcessor.ProcessItems(dataItems: machineDataItems);
+var dataProcessor = new DataProcessor(new ConsoleCoffeeCountStore());
+dataProcessor.ProcessItems(machineDataItems);
 
 Console.WriteLine();
 Console.WriteLine($"The operation was successfully processed!");
