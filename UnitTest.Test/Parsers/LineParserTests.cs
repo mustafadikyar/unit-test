@@ -43,7 +43,7 @@ public class LineParserTests
     //}
 
     [InlineData("Cappuccino", "Invalid line")]
-    [InlineData("Cappuccino;InvalidDateTime", "Invalid datetime in line")]
+    [InlineData("Cappuccino;InvalidDateTime", "Invalid datetime in line -fail test")]
     [Theory]
     public void ShouldThrowExceptionForInvalidLine(string line, string expectedMessagePrefix)
     {
